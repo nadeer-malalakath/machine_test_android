@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainViewModel"
+            type="in.nadeerm.app.webandcraft.viewmodel.MainViewModel"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="in.nadeerm.app.webandcraft.view.ui.MainActivity">
+
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginBottom="?attr/actionBarSize"
+            />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="bottom"
+            android:background="@color/black"
+            app:itemBackground="@color/white"
+            app:menu="@menu/nav_menu"
+            app:itemIconTint="@color/black"
+            app:itemHorizontalTranslationEnabled="false"
+            app:itemTextColor="#808080"
+            android:textSize="8sp"
+            app:labelVisibilityMode="labeled"
+            />
+
+<!--        <include layout="@layout/view_progress_bar"/>-->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

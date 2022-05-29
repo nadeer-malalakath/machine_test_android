@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="65dp"
+    android:layout_height="100dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_card"
+        android:layout_marginTop="2dp"
+        app:cardCornerRadius="60dp"
+        android:layout_width="60dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="#ADD8E6"
+        android:layout_height="0dp"
+        android:layout_weight="60">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/banner_imagetwo"
+        android:layout_gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+</androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/category_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:text="hello"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        />
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:elevation="2dp"
+    app:cardCornerRadius="75dp"
+    android:background="@color/white"
+    android:layout_margin="5dp"
+    android:id="@+id/banner_card">
+
+    <LinearLayout
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+android:background="@color/white"
+        android:padding="5dp"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/banner_image"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            card_view:ignore="MissingClass" />
+
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
+
