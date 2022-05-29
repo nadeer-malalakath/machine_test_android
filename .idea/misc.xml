@@ -15,9 +15,10 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_empty_view.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/row_banners.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/row_categories.xml" value="0.148828125" />
         <entry key="app/src/main/res/layout/row_category_two.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_catogory.xml" value="0.1984375" />
-        <entry key="app/src/main/res/layout/row_products.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/row_products.xml" value="0.25" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.125" />
       </map>
     </option>

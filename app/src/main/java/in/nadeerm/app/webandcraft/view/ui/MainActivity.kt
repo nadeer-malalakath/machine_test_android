@@ -2,11 +2,8 @@ package `in`.nadeerm.app.webandcraft.view.ui
 
 import `in`.nadeerm.app.webandcraft.R
 import `in`.nadeerm.app.webandcraft.databinding.ActivityMainBinding
-import `in`.nadeerm.app.webandcraft.view.ui.banner.BannerFragment
 import `in`.nadeerm.app.webandcraft.view.ui.base.BaseActivity
-import `in`.nadeerm.app.webandcraft.view.ui.base.BaseFragment
 import `in`.nadeerm.app.webandcraft.viewmodel.MainViewModel
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -32,7 +29,7 @@ class MainActivity : BaseActivity()  {
         loadDashboard()
         binding.bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.action_home -> loadBottomItems(BannerFragment.newInstance())
+                R.id.action_home -> loadBottomItems(HomeFragment.newInstance())
 
 
             }
@@ -43,7 +40,7 @@ class MainActivity : BaseActivity()  {
 
     private fun loadDashboard() {
         val transaction = manager.beginTransaction()
-        transaction.add(R.id.main_container, BannerFragment.newInstance())
+        transaction.add(R.id.main_container, HomeFragment.newInstance())
         transaction.addToBackStack(null)
         transaction.commit()
     }

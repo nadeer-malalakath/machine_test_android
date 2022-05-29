@@ -1,10 +1,10 @@
 package `in`.nadeerm.app.webandcraft.service.model.homedata.banners
 
-data class Banners (
+
+
+data class Banners  (
 
     val id : Int,
 
-    val image_url : String,
-
-    val name : String
-        )
+    val banner_url : String
+)

@@ -7,5 +7,5 @@ data class CategoryResponse  (
 
     val type:String,
 
-    val values : ArrayList<Caategory>
+    val values : ArrayList<Category>
 )

@@ -1,8 +1,10 @@
 package `in`.nadeerm.app.webandcraft.service.model.homedata.category
 
-data class Caategory  (
+data class Category (
 
     val id : Int,
 
-    val banner_url : String
+    val image_url : String,
+
+    val name : String
 )

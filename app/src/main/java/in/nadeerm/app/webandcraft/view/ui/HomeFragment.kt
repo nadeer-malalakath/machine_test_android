@@ -2,42 +2,43 @@ package `in`.nadeerm.app.webandcraft.view.ui
 
 import `in`.nadeerm.app.webandcraft.Utils.Status
 import `in`.nadeerm.app.webandcraft.databinding.FragmentHomeBinding
-import `in`.nadeerm.app.webandcraft.view.callback.MainCallBackListener
+import `in`.nadeerm.app.webandcraft.view.adapter.*
 import `in`.nadeerm.app.webandcraft.view.ui.base.BaseFragment
 import `in`.nadeerm.app.webandcraft.viewmodel.HomeDataViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment:BaseFragment() {
+class HomeFragment : BaseFragment(), BannerAdapter.BannerListener,
+    CategoryAdapter.CategoryListener, ProductsAdapter.ProductsListener {
 
-    private var _binding: FragmentHomeBinding ?= null
+    private val homeDataViewModel : HomeDataViewModel by viewModel()
+    private val adapter2: BannerAdapter by inject()
+    private val adapter: CategoryAdapter by inject()
+    private val adapter3: ProductsAdapter by inject()
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
-    private val homeDataViewModel: HomeDataViewModel by viewModel()
-    private var listener : MainCallBackListener? = null
+
 
     companion object {
         @JvmStatic
-        fun newInstance() = HomeFragment()
+        fun newInstance() =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+
+                }
+            }
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)?.supportActionBar?.hide()
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
+        }
     }
 
     override fun onCreateView(
@@ -56,27 +57,55 @@ class HomeFragment:BaseFragment() {
         setUp()
     }
 
-
     override fun setUp() {
-        listenResponse()
-     homeDataViewModel.getBanners()
-
+        listenBannerResponse()
+        listenCategoryResponse()
+        listenProductsResponse()
+        homeDataViewModel.getBanners()
+        homeDataViewModel.getCategory()
+        homeDataViewModel.getProducts()
+        binding?.rvBanner?.adapter = adapter2
+        binding?.rvCategory?.adapter = adapter
+        binding?.rvProducts?.adapter = adapter3
+        adapter2.setBannerListener(this)
+        adapter.setCategoryListener(this)
+        adapter3.setProductsListener(this)
     }
 
-
-    private fun listenResponse() {
-        homeDataViewModel.getResponse().observe(viewLifecycleOwner, {
+    private fun listenBannerResponse() {
+        homeDataViewModel.getResponseBanners().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { response ->
                         showBaseView()
-                       println("=======${response.homeData[0].values[0].id}=====")
+                        adapter2.addItems(response.homeData[1].values)
+                    }
+                }
+                Status.LOADING -> {
+                    showProgress()
+                }
+                Status.ERROR -> {
+                    //Handle Error
+                    hideProgress()
+                    showBaseView()
+                }
+                Status.EXCEPTION -> {
+                    hideProgress()
+                    showBaseView()
+                }
+            }
+        })
+    }
 
-                        //binding?.userName1?.text = response.name
-                        //Picasso.get().load(response.image).into(binding?.profileImage)
-                        //binding?.designationHome?.text = response.designation
-                        //binding?.departmentHome?.text = response.department
+    private fun listenCategoryResponse() {
+        homeDataViewModel.getResponseCategory().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    hideProgress()
+                    it.data?.let { response ->
+                        showBaseView()
+                        adapter.addItems(response.homeData[0].values)
 
                     }
                 }
@@ -91,25 +120,55 @@ class HomeFragment:BaseFragment() {
                 Status.EXCEPTION -> {
                     hideProgress()
                     showBaseView()
-                    //binding?.rvMaterials?.showErrorToast(it.message!!)
+                }
+            }
+        })
+    }
+
+    private fun listenProductsResponse() {
+        homeDataViewModel.getResponseProducts().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    hideProgress()
+                    it.data?.let { response ->
+                        showBaseView()
+                        adapter3.addItems(response.homeData[2].values)
+
+
+                    }
+                }
+                Status.LOADING -> {
+                    showProgress()
+                }
+                Status.ERROR -> {
+                    //Handle Error
+                    hideProgress()
+                    showBaseView()
+                }
+                Status.EXCEPTION -> {
+                    hideProgress()
+                    showBaseView()
+
                 }
             }
         })
     }
 
     override fun showProgress() {
-
     }
 
     override fun hideProgress() {
-
     }
 
     override fun showBaseView() {
-
     }
 
     override fun hideBaseView() {
-
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }

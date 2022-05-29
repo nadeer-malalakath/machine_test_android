@@ -1,6 +1,6 @@
 package `in`.nadeerm.app.webandcraft.service.repository
 
-import `in`.nadeerm.app.webandcraft.service.model.homedata.HomeDataBanners
+import `in`.nadeerm.app.webandcraft.service.model.homedata.banners.HomeDataBanners
 import `in`.nadeerm.app.webandcraft.service.model.homedata.category.HomeDataCategory
 import `in`.nadeerm.app.webandcraft.service.model.homedata.products.HomeDataProducts
 import `in`.nadeerm.app.webandcraft.service.network.ApiHelper

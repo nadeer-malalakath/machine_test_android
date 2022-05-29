@@ -4,14 +4,9 @@ import `in`.nadeerm.app.webandcraft.service.network.ApiHelper
 import `in`.nadeerm.app.webandcraft.service.network.ApiService
 import `in`.nadeerm.app.webandcraft.service.network.ApiServiceImpl
 import `in`.nadeerm.app.webandcraft.service.repository.HomeDataRepository
-import `in`.nadeerm.app.webandcraft.view.adapter.BannerTableViewAdapter
-import `in`.nadeerm.app.webandcraft.view.adapter.CategoryTableViewAdapter
-import `in`.nadeerm.app.webandcraft.view.adapter.ProductsTableViewAdapter
-import `in`.nadeerm.app.webandcraft.viewmodel.BannerViewModel
+import `in`.nadeerm.app.webandcraft.view.adapter.*
 import `in`.nadeerm.app.webandcraft.viewmodel.HomeDataViewModel
 import `in`.nadeerm.app.webandcraft.viewmodel.MainViewModel
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -31,14 +26,13 @@ val ViewModelModule = module {
 
     viewModel { MainViewModel() }
     viewModel { HomeDataViewModel(homeDataRepository = get()) }
-    viewModel { BannerViewModel(homeDataRepository = get()) }
 
 }
 
 val AdapterModule = module {
-    factory { BannerTableViewAdapter() }
-    factory { CategoryTableViewAdapter() }
-    factory { ProductsTableViewAdapter() }
+    factory { BannerAdapter() }
+    factory { CategoryAdapter() }
+    factory { ProductsAdapter() }
 }
 
 val appModules = listOf(NetworkModule, FactoryModule, ViewModelModule, AdapterModule)

@@ -2,10 +2,9 @@ package `in`.nadeerm.app.webandcraft.view.adapter
 
 import `in`.nadeerm.app.webandcraft.R
 import `in`.nadeerm.app.webandcraft.Utils.AppConstant
-import `in`.nadeerm.app.webandcraft.service.model.homedata.category.Caategory
 import `in`.nadeerm.app.webandcraft.service.model.homedata.products.Products
 import `in`.nadeerm.app.webandcraft.view.callback.EmptyViewHolder
-import `in`.nadeerm.app.webandcraft.view.ui.banner.BannerFragment
+import `in`.nadeerm.app.webandcraft.view.ui.HomeFragment
 import `in`.nadeerm.app.webandcraft.view.ui.base.BaseViewHolder
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -17,7 +16,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class ProductsTableViewAdapter   : RecyclerView.Adapter<BaseViewHolder>() {
+class ProductsAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val products = ArrayList<Products>()
     private var listener: ProductsListener? = null
@@ -83,7 +82,7 @@ class ProductsTableViewAdapter   : RecyclerView.Adapter<BaseViewHolder>() {
                 }
                 if(products.offer > 0)
                 {
-                   offerBanner.visibility = View.VISIBLE
+                    offerBanner.visibility = View.VISIBLE
                     offerBanner.text = "${products.offer.toString()}% OFF"
                 }
                 else
@@ -119,7 +118,7 @@ class ProductsTableViewAdapter   : RecyclerView.Adapter<BaseViewHolder>() {
 
     }
 
-    fun setProductsListener(context: BannerFragment?){
+    fun setProductsListener(context: HomeFragment?){
         listener = context
     }
 }
