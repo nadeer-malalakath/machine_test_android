@@ -6,6 +6,7 @@ import `in`.nadeerm.app.webandcraft.service.model.homedata.products.Products
 import `in`.nadeerm.app.webandcraft.view.callback.EmptyViewHolder
 import `in`.nadeerm.app.webandcraft.view.ui.HomeFragment
 import `in`.nadeerm.app.webandcraft.view.ui.base.BaseViewHolder
+import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -20,6 +22,7 @@ class ProductsAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val products = ArrayList<Products>()
     private var listener: ProductsListener? = null
+    var favourites : MutableList<String> = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
@@ -63,11 +66,12 @@ class ProductsAdapter : RecyclerView.Adapter<BaseViewHolder>() {
         private val productActualPrice = itemView.findViewById<TextView>(R.id.product_actual_price)
         private val productOfferPrice = itemView.findViewById<TextView>(R.id.product_offer_price)
         private val productName = itemView.findViewById<TextView>(R.id.product_name)
-
+        private val favouriteBtn = itemView.findViewById<TextView>(R.id.favourite_btn)
         override fun onBind(position: Int) {
             super.onBind(position)
             try {
                 val products = products[position]
+                favourites.add(position,"false")
                 productActualPrice.text = products.actual_price
                 productActualPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 productOfferPrice.text = products.offer_price
@@ -93,6 +97,22 @@ class ProductsAdapter : RecyclerView.Adapter<BaseViewHolder>() {
                 {
                     productActualPrice.visibility = View.INVISIBLE
                 }
+                favouriteBtn.setOnClickListener {
+                    if (favourites[position] == "false")
+                    {
+                        favourites.set(position,"true")
+                        favouriteBtn.setBackgroundResource(R.drawable.ic_marked_favourite)
+                        listener?.favourite(products.name)
+                    }
+                    else
+                    {
+                        favourites.set(position,"false")
+                        favouriteBtn.setBackgroundResource(R.drawable.ic_unmarked_favourite)
+                        listener?.unfavourite(products.name)
+                    }
+
+                }
+
 
                 Picasso.get().load(products.image).into(bannerImg)
 
@@ -115,6 +135,9 @@ class ProductsAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     }
 
     interface ProductsListener{
+
+        fun favourite(name:String)
+        fun unfavourite(name:String)
 
     }
 

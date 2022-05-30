@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -169,6 +170,16 @@ class HomeFragment : BaseFragment(), BannerAdapter.BannerListener,
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun favourite(name: String) {
+        val toast = Toast.makeText(context,"${name} added to favourites",Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
+    override fun unfavourite(name: String) {
+        val toast = Toast.makeText(context,"${name} removed from favourites",Toast.LENGTH_SHORT)
+        toast.show()
     }
 
 }

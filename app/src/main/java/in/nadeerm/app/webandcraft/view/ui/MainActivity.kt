@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity()  {
@@ -15,7 +16,6 @@ class MainActivity : BaseActivity()  {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModel()
     private lateinit var manager: FragmentManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -27,6 +27,8 @@ class MainActivity : BaseActivity()  {
     override fun setUp() {
         manager = supportFragmentManager
         loadDashboard()
+        binding?.bottomNav?.getOrCreateBadge(R.id.action_cart).number = 2
+
         binding.bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_home -> loadBottomItems(HomeFragment.newInstance())
